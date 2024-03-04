@@ -3,16 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        try {
+            return response()->json(
+                Genre::query()->paginate(5),
+                Response::HTTP_OK
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                ['data' => [], 'message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
