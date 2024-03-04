@@ -6,6 +6,7 @@ use App\Models\Film;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class FilmController extends Controller
@@ -31,9 +32,9 @@ class FilmController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('films.create');
     }
 
     /**
@@ -47,9 +48,19 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Film $film)
+    public function show(Film $film): JsonResponse
     {
-        //
+        try {
+            return response()->json(
+                $film,
+                Response::HTTP_OK
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                ['data' => [], 'message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**

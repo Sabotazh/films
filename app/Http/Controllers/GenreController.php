@@ -6,6 +6,7 @@ use App\Models\Genre;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class GenreController extends Controller
@@ -31,9 +32,9 @@ class GenreController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('genres.create');
     }
 
     /**
@@ -47,9 +48,19 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show(Genre $genre): JsonResponse
     {
-        //
+        try {
+            return response()->json(
+                $genre->films()->orderByPivot('film_id')->paginate(4),
+                Response::HTTP_OK
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                ['data' => [], 'message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
