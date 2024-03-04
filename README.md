@@ -13,11 +13,11 @@ php artisan serv
 ```
 
 ```bash
-php artisan make:model Genre -msrc
+php artisan make:model Genre -msRrc
 ```
 
 ```bash
-php artisan make:model Film -msrc
+php artisan make:model Film -msRrc
 ```
 
 ```bash
@@ -26,10 +26,6 @@ php artisan make:migration create_film_genre_table
 
 ```bash
 php artisan make:view genres.create
-```
-
-```bash
-php artisan make:view genres.edit
 ```
 
 ```bash

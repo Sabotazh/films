@@ -1,3 +1,4 @@
+@php use App\Models\Genre; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -7,7 +8,7 @@
             @php
                 $color = ['', 'light', 'secondary', 'dark', 'success', 'danger', 'warning', 'info']
             @endphp
-            @forelse(\App\Models\Genre::all() as $genre)
+            @forelse(Genre::all() as $genre)
                 <button class="btn btn-{{ $color[$genre->id] ?? 'primary' }} rounded-pill px-3"
                         type="button">{{ ucfirst($genre->title) }}
                 </button>

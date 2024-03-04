@@ -1,3 +1,4 @@
+@php use App\Models\Genre; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -25,7 +26,7 @@
                     <label for="inputGenre" class="form-label">Жанр <span class="text-danger">*</span></label>
                     <select id="inputGenre" class="form-select" name="genre">
                         <option selected>Выбрать...</option>
-                        @forelse(\App\Models\Genre::all() as $genre)
+                        @forelse(Genre::all() as $genre)
                             <option value="{{ $genre->id }}">{{ ucfirst($genre->title) }}</option>
                         @empty
                             <option>Без жанра</option>
@@ -53,7 +54,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12" style="height: 30vh">
                 <button type="submit" class="btn btn-primary">Добавить фильм</button>
             </div>
         </form>

@@ -22,7 +22,7 @@
                             Ab, alias aliquam assumenda consectetur ducimus ea magnam, nisi omnis quam quia quo quos,
                             recusandae rerum sequi sunt ut vel vero voluptatem?
                         </p>
-                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                        <a href="{{ route('films.edit', $film) }}" class="icon-link gap-1 icon-link-hover stretched-link">
                             Подробнее о фильме
                             <svg class="bi">
                                 <use xlink:href="#chevron-right"/>
