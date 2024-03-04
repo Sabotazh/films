@@ -40,9 +40,27 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        try {
+            $request->validate([
+                'title' => ['required', 'string', 'max:20']
+            ]);
+
+            $genre = Genre::query()->firstOrCreate([
+                'title' => $request->get('title')
+            ]);
+
+            return response()->json(
+                $genre,
+                Response::HTTP_CREATED
+            );
+        } catch (Exception $e) {
+            return response()->json(
+                ['data' => [], 'message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
