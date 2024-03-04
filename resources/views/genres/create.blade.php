@@ -9,9 +9,17 @@
                 $color = ['', 'light', 'secondary', 'dark', 'success', 'danger', 'warning', 'info']
             @endphp
             @forelse(Genre::all() as $genre)
-                <button class="btn btn-{{ $color[$genre->id] ?? 'primary' }} rounded-pill px-3"
-                        type="button">{{ ucfirst($genre->title) }}
-                </button>
+                <form action="{{ route('genres.destroy', $genre) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-{{ $color[$genre->id] ?? 'primary' }} rounded-pill px-3 position-relative"
+                            type="submit">{{ ucfirst($genre->title) }}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            x
+                        </span>
+                    </button>
+                </form>
+                &nbsp;&nbsp;&nbsp;
             @empty
                 <p>Жанров пока нет ...</p>
             @endforelse

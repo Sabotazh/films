@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,26 +83,13 @@ class GenreController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Genre $genre)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Genre $genre)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre): RedirectResponse
     {
-        //
+        $genre->delete();
+
+//        return response()->json('', Response::HTTP_NO_CONTENT);
+        return to_route('genres.create');
     }
 }

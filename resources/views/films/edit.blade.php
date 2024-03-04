@@ -61,6 +61,17 @@
                 <button type="submit" class="btn btn-primary">Обновить фильм</button>
             </div>
         </form>
+            <div class="col-12 mb-3">
+                <form action="{{ route('films.destroy', $film) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit"
+                            class="btn btn-danger ml-4"
+                            onclick="return confirm('Действительно удалить?')">
+                        Удалить фильм
+                    </button>
+                </form>
+            </div>
     </div>
 
 @endsection

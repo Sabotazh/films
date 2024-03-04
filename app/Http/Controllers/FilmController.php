@@ -130,8 +130,11 @@ class FilmController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Film $film)
+    public function destroy(Film $film): RedirectResponse
     {
-        //
+        $film->delete();
+
+//        return response()->json('', Response::HTTP_NO_CONTENT);
+        return to_route('films.index')->with('success', 'Film moved to trash.');
     }
 }
