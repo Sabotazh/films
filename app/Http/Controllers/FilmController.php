@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FilmRequest;
+use App\Http\Resources\FilmResource;
 use App\Models\Film;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -79,7 +80,7 @@ class FilmController extends Controller
     {
         try {
             return response()->json(
-                $film,
+                new FilmResource($film),
                 Response::HTTP_OK
             );
         } catch (Exception $e) {
