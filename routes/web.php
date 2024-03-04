@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('start_page');
+
+Route::resource('/genres', GenreController::class);
+Route::resource('/films', FilmController::class);
